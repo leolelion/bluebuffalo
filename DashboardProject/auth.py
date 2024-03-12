@@ -1,5 +1,5 @@
 from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
-from flask_sqlalchemy import SQLALCHEMY
+from flask_sqlalchemy import SQLAlchemy
 # from models import User
 
 auth = Blueprint('app', __name__)
