@@ -16,7 +16,9 @@ if __name__ == '__main__':
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
 """
+from flask import Flask, render_template, Blueprint
 from DashboardProject import create_app
+
 
 app = create_app()
 
