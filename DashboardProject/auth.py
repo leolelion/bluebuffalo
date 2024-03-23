@@ -21,7 +21,7 @@ def index():
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    result = login()
+    result = create_login()
     return result
 
 

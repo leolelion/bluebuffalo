@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request
-import
-def login():
+from .models import User
+from werkzeug.security import generate_password_hash, check_password_hash
+from . import db   ##means from __init__.py import db
+# from flask_login import login_user, login_required, logout_user, current_user
+
+def create_login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
