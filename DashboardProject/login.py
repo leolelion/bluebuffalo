@@ -19,5 +19,4 @@ def check_login():
                 flash('Incorrect password, try again.', category='error')
         else:
             flash('Email does not exist.', category='error')
-
     return render_template("login.html", user=current_user)

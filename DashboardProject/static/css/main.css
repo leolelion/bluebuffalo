@@ -82,3 +82,12 @@ h1 {
     padding-top: 3em;
     padding-bottom: 3em;
 }
+
+.admin-button {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}

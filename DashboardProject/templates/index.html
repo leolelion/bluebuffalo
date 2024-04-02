@@ -217,9 +217,20 @@
 			<h1 style="font-size: 20px;">Comment</h1>
 			<div class="comment-section">
 				<p>That is a good graph</p>
+                <button class="admin-button" style="display: none;">Delete</button>
+            </div>
+            <div class="comment-section">
 				<p>That is a good graph</p>
+                <button class="admin-button" style="display: none;">Delete</button>
 			</div>
 			</div>
+            <script>
+            var isAdmin = true; // Set this based on your authentication logic
+            var adminButton = document.getElementByClass('adminButton');
+            if (isAdmin) {
+                adminButton.style.display = 'inline-block';
+            }
+            </script>
 			<div id="post-comment">
 			<h1 style="font-size: 20px;">Post Comment</h1>
 			<form class="comment-form" action="#" method="POST">

@@ -1,5 +1,5 @@
 from DashboardProject import db
-from DashboardProject.models import Pollutant, City
+from DashboardProject.models import Pollutant, City, Comment
 from sqlalchemy import func
 
 def get_top10_data(user_date):
@@ -52,3 +52,10 @@ def get_aqi_population(user_date):
                         .limit(30)\
                         .all()
     return query
+
+def display_comment(city_name):
+    city = City.query.filter_by(cityName=city_name).first()
+    if city:
+        comments = Comment.query.filter_by(cityId=city.cityId).all()
+        return comments
+    return []

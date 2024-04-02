@@ -20,7 +20,7 @@ def header():
 def index():
     """"""
     return render_template("index.html")
-@auth.route('/login', methods=['GET', 'POST'])
+@auth.route('/login', methods=['POST'])
 def login():
     """"""
     result = check_login()

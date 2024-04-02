@@ -49,3 +49,6 @@ class Comment(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey('user.userId'))
     cityId = db.Column(db.Integer, db.ForeignKey('city.cityId'))
 
+
+
+
