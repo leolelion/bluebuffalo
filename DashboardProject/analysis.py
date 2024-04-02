@@ -1,7 +1,9 @@
+from flask import Flask, render_template, request
+import pandas as pd
 import sqlite3
-from flask import render_template, request
 from DashboardProject.models import Pollutant, City
 from DashboardProject import db
+from sqlalchemy import func
 
 
 # Connection to database

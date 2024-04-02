@@ -1,9 +1,8 @@
-from flask import render_template, request, Blueprint
+from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
 from DashboardProject.analysis import perform_analysis
-from DashboardProject.dashboard import get_top10_data, get_least10_data,\
-                                        get_pollutant_data, get_aqi_population
+from DashboardProject.dashboard import get_top10_data, get_least10_data, get_pollutant_data, get_aqi_population
 from DashboardProject.map import perform_map
-from DashboardProject.insert_comment import insert_comment
+from DashboardProject.insertComment import insert_comment
 from DashboardProject.login import check_login
 
 auth = Blueprint('auth', __name__)
