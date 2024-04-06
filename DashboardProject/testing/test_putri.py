@@ -1,15 +1,14 @@
-from DashboardProject.models import Comment
+from DashboardProject.models import User
+from DashboardProject import db
 
-def test_dashboard(client):
+def test_login(client):
     """"""
-    response = client.get("/")
-    assert b"<title>Dashboard</title>" in response.data
+    new_user = User(userId="1",firstName="putri",lastName="leksono",email="putri", password="putri")
+    db.session.add(new_user)
+    db.session.commit()
 
-def test_indexcomment(client, app):
-    """"""
-    response = client.post("/insertComment", data={"comment": "It is good.",\
-                                                    "city":"Phoenix"})
+    response = client.post("/login", data={"email": "putri",\
+                                           "password": "putri"})
 
     with app.app_context():
-        assert Comment.query.count() == 4
-        assert Comment.query.first().commentText == "It was good."
+        assert User.query.count() == 1

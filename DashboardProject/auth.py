@@ -20,15 +20,24 @@ def header():
 def index():
     """"""
     return render_template("index.html")
-@auth.route('/login', methods=['POST'])
-def login():
+@auth.route('/login', methods=['GET','POST'])
+def login_post():
     """"""
     result = check_login()
     return result
+
+@auth.route('/login')
+def login():
+    return render_template('/login')
+
 @auth.route('/newAccount')
-def newAccount():
-    """"""
-    return render_template("newAccount.html")
+def signup():
+    return render_template('signup.html')
+
+@auth.route('/newAccount', methods=['GET','POST'])
+def signup_post():
+    # code to validate and add user to database goes here
+    return redirect(url_for('auth.login'))
 @auth.route('/accountSetting')
 def accountSetting():
     """"""
