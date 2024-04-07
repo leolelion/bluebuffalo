@@ -12,7 +12,7 @@
 
 #map-page #mapUS {
     height: 73%;
-    width: 64%;
+    width: 55%;
     border: gray solid;
     position: absolute;
     right: 2%;
@@ -22,10 +22,10 @@
 
 #map-page #mapHI, #map-page #mapAK {
     height: 35%;
-    width: 30%;
+    width: 25%;
     border: gray solid;
     position: absolute;
-    left: 2%;
+    left: 16%;
     top: 22%;
 }
 
