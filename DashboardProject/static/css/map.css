@@ -1,14 +1,48 @@
 #map-page h1 {
     position: absolute;
-    top: 13%;
-    font-size: 40px;
-    left: 2%;
-    border-bottom: 3px solid black;
+    font-size: 50px;
+    padding-top: 20px;
+    margin-bottom: 50px;
+    margin-left: 30px;
+    border-bottom: 2px solid black;
 }
 
 
 #map-page {
     min-height: 730px;
+}
+
+#map-page footer {
+    position: absolute;
+    bottom: -15%;
+}
+
+#map-page #legend {
+    height: 73%;
+    width: 12%;
+    position: absolute;
+    left: 2%;
+    top: 25%;
+}
+
+#map-page #legend h2 {
+    font-size: 25px;
+    text-align: center;
+}
+
+#map-page #legend p {
+    font-size: 18px;
+    text-align: center;
+}
+
+#map-page #legend img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 17%;
+    width: 30%;
+    filter: drop-shadow(5px 3px 1px #6BDBD2);
+    object-fit: contain;
 }
 
 #map-page #mapUS {
@@ -19,7 +53,7 @@
     border-radius: 10px;
     position: absolute;
     right: 2%;
-    top: 22%;
+    top: 25%;
     z-index: 1;
 }
 
@@ -31,11 +65,11 @@
     border-radius: 10px;
     position: absolute;
     left: 16%;
-    top: 22%;
+    top: 25%;
 }
 
 #map-page #mapHI {
-    top: 60%;
+    top: 63%;
 }
 
 #map-page #pin_content {
