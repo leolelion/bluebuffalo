@@ -16,18 +16,19 @@ def check_newAccount():
 
 
     if pass1 != pass2:
-        flash('password and confirm password need to be exact same')
+        flash('password and confirm password need to be exact same', category='error')
         return redirect(url_for('auth.newAccount'))
 
     if user: # if a user is found, we want to redirect back to signup page so user can try again
-        flash('Email address already exists')
+        flash('Email address already exists', category='success')
         return redirect(url_for('auth.login'))
 
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-    new_user = User(firstName=firstname, lastName=lastname, email=email, password=generate_password_hash(pass1, method='sha256'))
+    new_user = User(firstName=firstname, lastName=lastname, email=email, password=generate_password_hash(pass1, method='scrypt'))
 
     # add the new user to the database
     db.session.add(new_user)
     db.session.commit()
+    flash('Account created!', category='success')
 
     return redirect(url_for('auth.login'))

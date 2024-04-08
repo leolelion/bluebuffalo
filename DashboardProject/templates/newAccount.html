@@ -6,6 +6,13 @@
 <main id="new-account">
     <h1>Create Your BlueBuffalo Account!</h1>
     <div class="fields">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="notification is-danger">
+            {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+        </div>
+        {% endif %}
+        {% endwith %}
         <form action="/newAccount" id='register-form' method="POST">
             <input type="text" id="fname" name="fname" placeholder="First Name">
             <input type="text" id="lname" name="lname" placeholder="Last Name"><br>

@@ -6,6 +6,7 @@ from DashboardProject.insertComment import insert_comment
 from DashboardProject.displayIndexComment import display_comment_index
 from DashboardProject.login import check_login
 from DashboardProject.newAccount import check_newAccount
+from flask_login import login_user, login_required, logout_user
 
 from DashboardProject.message import email_alert
 
@@ -60,8 +61,10 @@ def newAccount_post():
     return result
 
 @auth.route('/logout')
+@login_required
 def logout():
-    return 'Logout'
+    logout_user()
+    return redirect("dashboard.html")
 
 @auth.route('/accountSetting')
 def accountSetting():
