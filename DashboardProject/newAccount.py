@@ -16,7 +16,7 @@ def check_newAccount():
 
 
     if pass1 != pass2:
-        flash('password and confirm password need to be exact same', category='error')
+        flash('Password and confirm password need to be exact same', category='error')
         return redirect(url_for('auth.newAccount'))
 
     if user: # if a user is found, we want to redirect back to signup page so user can try again
