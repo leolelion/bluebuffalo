@@ -27,7 +27,12 @@
 			</div>
 			<div class="dropdown">
 				<a id="user" href="#">
-					<img alt="Profile" src="../../static/images/defaultPic.png" height="50px">
+					<img alt="Profile" src="../../static/images/defaultPic.png" height="30px">
+					{% if current_user.is_authenticated %}
+					<div style="padding-right:0.5em, font-size:12pt" class="username">
+						{{current_user.firstName}}
+					</div>
+    				{% endif %}
 				</a>
 				<div class="dropdown-content">
 					<a href="login">Login</a>
