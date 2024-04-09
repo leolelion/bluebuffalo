@@ -9,6 +9,8 @@ from DashboardProject.login import check_login
 from flask_login import current_user
 from werkzeug.security import generate_password_hash
 from DashboardProject.message import email_alert
+from . import db
+from .models import User
 
 
 auth = Blueprint('auth', __name__)
