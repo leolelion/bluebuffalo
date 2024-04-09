@@ -33,12 +33,17 @@
 						{{current_user.firstName}}
 					</div>
     				{% endif %}
+					{% if not current_user.is_authenticated %}
+					<div style="padding-right:0.5em, font-size:12pt" class="username">
+						<p>not logged in</p>
+					</div>
+    				{% endif %}
 				</a>
 				<div class="dropdown-content">
 					<a href="login">Login</a>
 					<a href="newAccount">Create Account</a>
 					<a href="accountSetting">Account Settings</a>
-					<a href="#">Logout</a>
+					<a href="index.html">Logout</a>
 				</div>
 			</div>
 		</header>
