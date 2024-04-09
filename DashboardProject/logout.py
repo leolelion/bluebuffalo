@@ -5,5 +5,4 @@ from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
 def check_logout():
     logout_user()
-    flash("logout sucessfully!", category='success')
-    return render_template("login.html")
+    return redirect(url_for('auth.login'))

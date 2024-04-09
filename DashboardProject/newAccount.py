@@ -10,7 +10,7 @@ def check_newAccount():
     lastname = request.form.get('lname')
     email = request.form.get('email')
     pass1 = request.form.get('pass1')
-    pass2 = request.form.get('pass1')
+    pass2 = request.form.get('pass2')
 
     user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
 
@@ -29,6 +29,5 @@ def check_newAccount():
     # add the new user to the database
     db.session.add(new_user)
     db.session.commit()
-    flash('Account created!', category='success')
 
     return redirect(url_for('auth.login'))
