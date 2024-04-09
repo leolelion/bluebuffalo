@@ -34,11 +34,13 @@ class AccountSettingsTestCase(unittest.TestCase):
             self.assertEqual(res.status_code, 200)
             user = User.query.filter_by(email=self.user_data['curremail']).first()
             self.assertTrue(user.check_password(self.user_data['newpass']))
-
+"""
+    ONLY TO BE USED WITH A TEST DATABASE
     def tearDown(self):
         with self.app.app_context():
             # drop all tables
             db.drop_all()
+"""
 
 # runs the unit tests in the module
 if __name__ == '__main__':
