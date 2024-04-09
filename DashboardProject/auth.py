@@ -17,6 +17,7 @@ def hello_world():  # put application's code here
     """"""
     return 'Hello World!'
 @auth.route('/dashboard', methods=['GET', 'POST'])
+@login_required
 def dashboard():
     if request.method == 'POST':
         user_date = request.form['date']
