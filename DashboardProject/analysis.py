@@ -6,8 +6,11 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 import json
 
-# Connection to database
-conn = sqlite3.connect('instance/database.db')
+import os
+basedir = os.path.abspath(os.path.dirname(__file__))
+db_path = os.path.join(basedir,  '..', 'instance', 'database.db')
+conn = sqlite3.connect(db_path)
+
 cursor = conn.cursor()
 
 def perform_analysis(city):
