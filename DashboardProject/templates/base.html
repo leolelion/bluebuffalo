@@ -25,11 +25,6 @@
 				<a href="dashboard" id="dash">Dashboard</a>
 				<a href="map" id="map">Map</a>
 			</div>
-			{% if current_user.is_authenticated %}
-				<div>
-					{{current_user.firstName}}
-				</div>
-    		{% endif %}
 			<div class="dropdown">
 				<a id="user" href="#">
 					<img alt="Profile" src="../../static/images/defaultPic.png" height="50px">
