@@ -14,7 +14,8 @@ def check_login():
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user)
-                return render_template("index.html", user=current_user)
+                return redirect(url_for('auth.dashboard'))
+
             else:
                 flash('Incorrect password, try again.', category='error')
                 return render_template("login.html")
