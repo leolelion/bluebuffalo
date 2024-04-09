@@ -24,7 +24,7 @@ def check_newAccount():
         return redirect(url_for('auth.login'))
 
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-    new_user = User(firstName=firstname, lastName=lastname, email=email, password=generate_password_hash(pass1, method='spbkdf2:sha256'))
+    new_user = User(firstName=firstname, lastName=lastname, email=email, password=generate_password_hash(pass1, method='pbkdf2:sha256'))
 
     # add the new user to the database
     db.session.add(new_user)
