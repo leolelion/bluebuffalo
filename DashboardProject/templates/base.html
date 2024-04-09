@@ -24,20 +24,21 @@
 				<a href="dashboard" id="logo"><img src="../static/images/logo_blue.png" alt="bluebuffalo_logo" height="80px" /></a>
 				<a href="dashboard" id="dash">Dashboard</a>
 				<a href="map" id="map">Map</a>
+
 			</div>
 			<div class="dropdown">
 				<a id="user" href="#">
-					<img alt="Profile" src="../../static/images/defaultPic.png" height="30px">
 					{% if current_user.is_authenticated %}
+					<img alt="Profile" src="../../static/images/defaultPic.png" height="30px">
 					<div style="padding-right:0.5em, font-size:12pt" class="username">
 						{{current_user.firstName}}
 					</div>
-    				{% endif %}
-					{% if not current_user.is_authenticated %}
+				{% endif %}
+				{% if not current_user.is_authenticated %}
+					<img alt="Profile" src="../../static/images/defaultPic.png" height="50px">
 					<div style="padding-right:0.5em, font-size:12pt" class="username">
-						<p>not logged in</p>
 					</div>
-    				{% endif %}
+				{% endif %}
 				</a>
 				<div class="dropdown-content">
 					<a href="login">Login</a>
