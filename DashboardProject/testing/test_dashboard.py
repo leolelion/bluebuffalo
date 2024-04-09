@@ -14,7 +14,7 @@ def test_get_top10_data(mock_db_session):
     with app.app_context():
         # Mock data for the query result
         mock_query_result = [
-            (5, 'Bethel Island', 62),
+            (9, 'Bethel Island', 31),
             (96, 'Presque Isle', 64),
             (82, 'Boston', 68),
             (139, 'Londonderry', 68),
@@ -40,7 +40,7 @@ def test_get_top10_data(mock_db_session):
 
     # Assertions
     assert len(result) == 10  # Check if the result contains 10 items
-    assert result[0] == (9, 'Bethel Island', 31)
+    assert result[0] == (5, 'Bethel Island', 62)
     assert result[1] == (96, 'Presque Isle', 64)
     assert result[2] == (82, 'Boston', 68)
     assert result[3] == (139, 'Londonderry', 68)
@@ -58,7 +58,7 @@ def test_get_least10_data(mock_db_session):
     with app.app_context():
         # Mock data for the query result
         mock_query_result = [
-            (11, 'Los Angeles', 670),  # (city_id, city_name, total_aqi)
+            (22, 'Los Angeles', 335),  # (city_id, city_name, total_aqi)
             (15, 'Rubidoux', 560),
             (132, 'Salt Lake City', 476),
             (16, 'Not in a city', 346),
