@@ -6,8 +6,10 @@ from DashboardProject.map import perform_map
 from DashboardProject.insertComment import insert_comment
 from DashboardProject.displayIndexComment import display_comment_index
 from DashboardProject.login import check_login
-
+from flask_login import current_user
+from werkzeug.security import generate_password_hash
 from DashboardProject.message import email_alert
+
 
 auth = Blueprint('auth', __name__)
 
@@ -49,6 +51,22 @@ def newAccount():
 
 @auth.route('/accountSetting', methods=['GET', 'POST'])
 def accountSetting():
+    if request.method == 'POST':
+        firstname = request.form.get('firstname')
+        lastname = request.form.get('lastname')
+        email = request.form.get('curremail')
+        password = request.form.get('currpass')
+        newpass = request.form.get('newpass')
+
+        user = User.query.filter_by(email=email).first()
+
+        if user and user.check_password(password):
+            user.firstName = firstname
+            user.lastName = lastname
+            if newpass:
+                user.password = generate_password_hash(newpass, method='sha256')
+            db.session.commit()
+            return redirect(url_for('auth.accountSetting'))
     return render_template("accountSetting.html")
 
 
