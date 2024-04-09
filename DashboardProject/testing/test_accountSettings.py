@@ -23,7 +23,7 @@ class AccountSettingsTestCase(unittest.TestCase):
         with self.app.app_context():
             # create all tables
             db.create_all()
-            hashed_password = generate_password_hash(self.user_data['currpass'], method='sha256')
+            hashed_password = generate_password_hash(self.user_data['currpass'], method='pbkdf2:sha256')
             user = User(email=self.user_data['curremail'], password=hashed_password)
             db.session.add(user)
             db.session.commit()
