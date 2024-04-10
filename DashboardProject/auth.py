@@ -99,7 +99,7 @@ def accountSetting():
             return render_template("accountSetting.html")
 
         # Update the user details in the database
-        user = User.query.filter_by(email=curremail).first()
+        user = User.query.filter_by(email=current_user.email).first()
         user.firstName = firstname
         user.lastName = lastname
         user.password = generate_password_hash(newpass)
