@@ -1,4 +1,4 @@
-from flask import render_template, request, Blueprint, redirect, url_for
+from flask import render_template, request, Blueprint, redirect, url_for, flash
 from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values, get_total_mean, \
     get_prediction
 from DashboardProject.dashboard import get_top10_data, get_least10_data, get_pollutant_data, get_aqi_population
@@ -10,7 +10,6 @@ from flask_login import current_user
 from werkzeug.security import generate_password_hash
 from DashboardProject.message import email_alert
 from . import db
-from .models import User, Comment
 from DashboardProject.logout import check_logout
 from DashboardProject.newAccount import check_newAccount
 from . import db
@@ -61,10 +60,6 @@ def newAccount():
     return render_template("newAccount.html")
 
 
-
-@auth.route('/accountSetting', methods=['GET', 'POST'])
-
-
 @auth.route('/newAccount', methods=['GET', 'POST'])
 def newAccount_post():
     email = check_newAccount()
@@ -80,25 +75,40 @@ def logout():
     return result
 
 
-@auth.route('/accountSetting')
+# @auth.route('/accountSetting', methods=['GET', 'POST'])
+
+
+@auth.route('/accountSetting', methods=['GET', 'POST'])
 def accountSetting():
     if request.method == 'POST':
         firstname = request.form.get('firstname')
         lastname = request.form.get('lastname')
-        email = request.form.get('curremail')
-        password = request.form.get('currpass')
+        curremail = request.form.get('curremail')
+        currpass = request.form.get('currpass')
         newpass = request.form.get('newpass')
+        confirmpass = request.form.get('confirmpass')
 
-        user = User.query.filter_by(email=email).first()
+        # Check if the current password is correct
+        if not current_user.check_password(currpass):
+            flash('Current password is incorrect.')
+            return render_template("accountSetting.html")
 
-        if user and user.check_password(password):
-            user.firstName = firstname
-            user.lastName = lastname
-            if newpass:
-                user.password = generate_password_hash(newpass, method='sha256')
-            db.session.commit()
-            return redirect(url_for('auth.accountSetting'))
+        # Check if the new password and confirm password match
+        if newpass != confirmpass:
+            flash('New password and confirm password do not match.')
+            return render_template("accountSetting.html")
+
+        # Update the user details in the database
+        user = User.query.filter_by(email=curremail).first()
+        user.firstName = firstname
+        user.lastName = lastname
+        user.password = generate_password_hash(newpass)
+
+        db.session.commit()
+
+        flash('Account details updated successfully.')
     return render_template("accountSetting.html")
+
 
 
 @auth.route('/map', methods=['GET', 'POST'])
