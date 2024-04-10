@@ -16,6 +16,16 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 	<!-- Other common meta tags, stylesheets, and scripts -->
+	<style>
+        .flashes {
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            /* Add other styling properties as needed */
+        }
+    </style>
 </head>
 <body>
 	<div class="wrapper">
@@ -55,6 +65,16 @@
 		<div class="content">
 			{% block content %}{% endblock %}
 		</div>
+		{% with messages = get_flashed_messages() %}
+  			{% if messages %}
+    			<div class=flashes>
+      				{% for message in messages %}
+        				<div>{{ message }}</div>
+      				{% endfor %}
+				</div>
+			{% endif %}
+		{% endwith %}
+
 
 		<footer>
 			<p id="copy">Copyright &copy 2024 Blue Buffalo Inc. All right reserved.</p>

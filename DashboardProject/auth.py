@@ -88,6 +88,10 @@ def accountSetting():
         newpass = request.form.get('newpass')
         confirmpass = request.form.get('confirmpass')
 
+        if not firstname or not lastname or not currpass or not newpass or not confirmpass:
+            flash('All fields must be filled.')
+            return render_template("accountSetting.html")
+
         # Check if the current password is correct
         if not current_user.check_password(currpass):
             flash('Current password is incorrect.')
@@ -102,7 +106,7 @@ def accountSetting():
         user = User.query.filter_by(email=current_user.email).first()
         user.firstName = firstname
         user.lastName = lastname
-        user.password = generate_password_hash(newpass)
+        user.password = generate_password_hash(newpass, method='pbkdf2:sha256')
 
         db.session.commit()
 
