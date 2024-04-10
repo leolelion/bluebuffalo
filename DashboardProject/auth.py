@@ -10,7 +10,7 @@ from flask_login import current_user
 from werkzeug.security import generate_password_hash
 from DashboardProject.message import email_alert
 from . import db
-from .models import User
+from .models import User, Comment
 
 
 auth = Blueprint('auth', __name__)
@@ -148,3 +148,12 @@ def analysis():
     cityName = request.args.get('city')
     result = perform_analysis(cityName)
     return result
+
+@auth.route('/delete_comment', methods=['POST'])
+def delete_comment():
+    comment_id = request.form.get('commentId')
+    comment = Comment.query.get(comment_id)
+    if comment:
+        db.session.delete(comment)
+        db.session.commit()
+    return redirect(url_for('auth.dashboard'))
