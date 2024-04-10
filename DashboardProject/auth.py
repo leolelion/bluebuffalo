@@ -11,7 +11,12 @@ from werkzeug.security import generate_password_hash
 from DashboardProject.message import email_alert
 from . import db
 from .models import User, Comment
-
+from DashboardProject.logout import check_logout
+from DashboardProject.newAccount import check_newAccount
+from . import db
+from .models import Comment, User
+from DashboardProject.message import email_alert
+from flask_login import login_user, login_required, logout_user
 
 auth = Blueprint('auth', __name__)
 
@@ -23,6 +28,7 @@ def hello_world():  # put application's code here
 
 
 @auth.route('/dashboard', methods=['GET', 'POST'])
+@login_required
 def dashboard():
     user_date = request.args.get('date', '2020-01-01')
     top_cities = get_top10_data(user_date)
@@ -41,9 +47,13 @@ def header():
 
 
 @auth.route('/login', methods=['GET', 'POST'])
-def login():
+def login_post():
     result = check_login()
     return result
+
+@auth.route('/login')
+def login():
+    return render_template('login.html')
 
 
 @auth.route('/newAccount')
@@ -51,7 +61,26 @@ def newAccount():
     return render_template("newAccount.html")
 
 
+
 @auth.route('/accountSetting', methods=['GET', 'POST'])
+
+
+@auth.route('/newAccount', methods=['GET', 'POST'])
+def newAccount_post():
+    email = check_newAccount()
+    if email:
+        send_notification = email_alert("Account Confirmation", "Thank you for creating an account! We're happy to have you here! Enjoy learning about Air Quality!", email)
+    return redirect(url_for('auth.login'))
+
+
+@auth.route('/logout')
+@login_required
+def logout():
+    result = check_logout()
+    return result
+
+
+@auth.route('/accountSetting')
 def accountSetting():
     if request.method == 'POST':
         firstname = request.form.get('firstname')
@@ -73,6 +102,7 @@ def accountSetting():
 
 
 @auth.route('/map', methods=['GET', 'POST'])
+@login_required
 def map():
     result = perform_map()
     return result
@@ -135,7 +165,7 @@ def test():
 
 
 @auth.route('/insertComment', methods=['GET', 'POST'])
-def insertComment_analysis():
+def insertComment():
     type, result = insert_comment()
     if type == "analysis":
         return redirect(url_for('auth.analysis', city=result))
@@ -157,3 +187,15 @@ def delete_comment():
         db.session.delete(comment)
         db.session.commit()
     return redirect(url_for('auth.dashboard'))
+
+
+@auth.route('/delete_comment_analysis', methods=['POST'])
+def delete_comment_analysis():
+    comment_id = request.form.get('commentId')
+    city = request.form.get('city')
+    comment = Comment.query.get(comment_id)
+    if comment:
+        db.session.delete(comment)
+        db.session.commit()
+    return redirect(url_for('auth.analysis', city=city))
+
